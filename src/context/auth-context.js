@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import authService from '../services/auth-service';
-import auth from '../services/auth-service';
-
 
 export const AuthContext = React.createContext();
 
@@ -14,6 +12,8 @@ class AuthProvider extends Component {
 
   login = async (user) => {
     const userData = await authService.login(user)
+    await localStorage.setItem('userId', userData.user._id);
+    await localStorage.setItem('token', userData.token);
     this.setState({
       firstTime: false,
       user: userData.user._id,
@@ -23,7 +23,7 @@ class AuthProvider extends Component {
 
   checkToken = async () => {
     if (this.state.token) {
-      const userData = auth.renewToken(this.state.token);
+      const userData = await authService.renewToken(this.state.token);
       this.setState({
         firstTime: false,
         user: userData.user._id,
@@ -41,6 +41,7 @@ class AuthProvider extends Component {
           token,
           firstTime,
           login: this.login,
+          checkToken: this.checkToken
         }
       }>
         {this.props.children}

@@ -9,9 +9,13 @@ class AuthService {
   }
 
   login = async (user) => {
-    //user tiene que tener email, password y remember
-    const res = await this.auth.post('/login', user);
-    return res.data;
+    try {
+      //user tiene que tener email, password y remember
+      const res = await this.auth.post('/login', user);
+      return res.data;
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   renewToken = async (token) => {

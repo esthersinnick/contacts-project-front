@@ -2,14 +2,14 @@ import axios from 'axios';
 
 class ContactsService {
   constructor() {
-    this.auth = axios.create({
+    this.contacts = axios.create({
       baseURL: 'http://localhost:5000/contacts',
       withCredentials: true,
     })
   }
 
-  getAll() {
-    return this.auth.post('/login', user)
+  getAll(token) {
+    return this.contacts.get('/', { headers: { 'Authorization': token } })
       .then(({ data }) => data);
   }
 }
