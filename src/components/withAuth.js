@@ -6,13 +6,13 @@ const withAuth = (Comp) => {
     render() {
       return (
         <AuthContext.Consumer>
-          {({ user, token, firstTime, login, checkToken }) => (
+          {({ user, token, firstTime, login, renewToken }) => (
             <Comp
               user={user}
               token={token}
               login={login}
               firstTime={firstTime}
-              checkToken={checkToken}
+              renewToken={renewToken}
               {...this.props}
             />
           )}

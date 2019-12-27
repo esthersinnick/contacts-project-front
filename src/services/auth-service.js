@@ -19,8 +19,12 @@ class AuthService {
   }
 
   renewToken = async (token) => {
-    const res = await this.auth.post('/renewToken', token);
-    return res.data;
+    try {
+      const res = await this.auth.post('/renewToken', { token });
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

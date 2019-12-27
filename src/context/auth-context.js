@@ -21,9 +21,10 @@ class AuthProvider extends Component {
     })
   }
 
-  checkToken = async () => {
+  renewToken = async () => {
     if (this.state.token) {
       const userData = await authService.renewToken(this.state.token);
+      await localStorage.setItem('token', userData.token);
       this.setState({
         firstTime: false,
         user: userData.user._id,
@@ -41,7 +42,7 @@ class AuthProvider extends Component {
           token,
           firstTime,
           login: this.login,
-          checkToken: this.checkToken
+          renewToken: this.renewToken
         }
       }>
         {this.props.children}

@@ -5,8 +5,12 @@ import contactsService from '../services/contacts-service';
 
 class Contacts extends Component {
 
+  //en el componentDidMount o con useEffect, renovar el token con auth props.renewToken()
   componentDidMount = async () => {
-    const token = this.props.token
+    const { token, firstTime, renewToken } = this.props
+    if (firstTime) {
+      renewToken();
+    }
     const contacts = await contactsService.getAll(token);
     this.props.setContacts(contacts)
   }

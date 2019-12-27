@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import contactsService from '../services/contacts-service';
-
 
 export const ContactsContext = React.createContext();
 
