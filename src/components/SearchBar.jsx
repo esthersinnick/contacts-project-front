@@ -16,7 +16,7 @@ class SearchBar extends Component {
   render() {
     const { term } = this.state;
     return (
-      <input name="term" type="text" value={term} onChange={this.inputChange} />
+      <input name="term" type="text" value={term} onChange={this.inputChange} placeholder="Search..." className="input border-primary-500 rounded" />
     )
   }
 }

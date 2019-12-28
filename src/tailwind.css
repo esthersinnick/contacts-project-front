@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap');
+* {
+  /* font-family: 'Courier New', Courier, monospace; */
+  font-family:  'Lato', sans-serif;;
+  color: #25272b;
+}
+
+.w-30pc {
+  width: 30%;
+}
+.input{
+  border: 1px solid;
+  padding: 0.2em 0.5em;
+}
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background-color: rgb(35, 35, 36);
+  color: #fff;
+}
+
+.height-30{
+  height: 30vh;
+}
+.height-70{
+  height: 70vh;
+}
+
+.btn:hover, .btn-blue {
+  color: #fff;
+  background-color: #968fff;
+}
+.btn-red {
+  background-color: #f7475e;
+  color: #fff;
+}
+
+@tailwind utilities;

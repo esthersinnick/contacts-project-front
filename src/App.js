@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <Router>
         <AuthProvider>
-          <div className="container">
+          <div>
             <Switch>
               <AnonRoute path="/login" exact component={Login} />
               <ContactsProvider>

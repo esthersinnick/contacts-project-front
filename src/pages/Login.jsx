@@ -1,60 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react'
 import withAuth from '../components/withAuth';
+import LoginForm from '../components/LoginForm';
+import image from '../images/abstract.jpg';
 
-
-class Login extends Component {
-  state = {
-    email: '',
-    password: '',
-    remember: false,
-    error: ''
-  }
-
-  inputOnChange = (event, checkbox) => {
-    const { name, value } = event.target
-    if (checkbox) {
-      this.setState({
-        [name]: event.target.checked
-      })
-    } else {
-      this.setState({
-        [name]: value
-      })
-    }
-  }
-
-  handleSubmit = async () => {
-    const { email, password, remember } = this.state;
-    await this.props.login({ email, password, remember });
-  }
-
-  validateForm = (event) => {
-    event.preventDefault();
-    const { email, password } = this.state;
-    if (!email || !password) {
-      return this.setState({ error: 'All fields are required' })
-    }
-    this.handleSubmit();
-  }
-
-  render() {
-    const { email, password, remember, error } = this.state;
-    const { message } = this.props;
-    return (
-      <div>
-        <h1>Login page</h1>
-        <form onSubmit={this.validateForm}>
-          <input placeholder="email" name="email" value={email} type="email" onChange={this.inputOnChange} />
-          <input placeholder="password" name="password" value={password} type="password" onChange={this.inputOnChange} />
-          <input name="remember" checked={remember} type="checkbox" onChange={(event) => { this.inputOnChange(event, 'checkbox') }} /> Remember me
-          <button type="submit">Login</button>
-          {message && <p>{message}</p>}
-          {!message && error && <p>{error}</p>}
-        </form>
+const Login = () => {
+  return (
+    <div className="flex flex-col md:flex-row">
+      <div className="md:w-3/5">
+        <img className="heigth-30 md:h-screen object-cover object-left" src={image} alt="abstract background" />
       </div>
-    )
-  }
+      <div className="md:w-2/5 height-70 flex flex-col md:h-screen justify-center items-center shadow-2xl">
+        <h1 className="text-xl font-bold uppercase tracking-widest">Contacts App</h1>
+        <LoginForm />
+      </div>
+    </div>
+  )
 }
 
-
-export default withAuth(Login)
+export default withAuth(Login);
