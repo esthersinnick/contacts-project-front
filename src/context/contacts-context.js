@@ -16,8 +16,16 @@ class ContactsProvider extends Component {
   }
 
   filterContacts = async (term) => {
+    console.log(term)
     const { contacts } = this.state
-    const filteredContacts = contacts.filter(contact => contact.includes(term))
+    const filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(term.toLowerCase()))
+    this.setState({ filteredContacts })
+  }
+
+  filterByLetter = async (event) => {
+    const letter = event.currentTarget.innerHTML
+    const { contacts } = this.state
+    const filteredContacts = contacts.filter(contact => contact.name[0].toLowerCase() === letter)
     this.setState({ filteredContacts })
   }
 
@@ -29,7 +37,8 @@ class ContactsProvider extends Component {
           contacts,
           filteredContacts,
           setContacts: this.setContacts,
-          filterContacts: this.filterContacts
+          filterContacts: this.filterContacts,
+          filterByLetter: this.filterByLetter
         }
       }>
         {this.props.children}

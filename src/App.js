@@ -14,12 +14,10 @@ import './App.css';
 
 class App extends Component {
   render() {
-
     return (
       <Router>
         <AuthProvider>
           <div className="container">
-            <h1>Contacts site</h1>
             <Switch>
               <AnonRoute path="/login" exact component={Login} />
               <ContactsProvider>

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import withAuth from '../components/withAuth';
 import withContacts from '../components/withContacts';
 import contactsService from '../services/contacts-service';
+import ContactDetail from '../components/contacts/ContactDetail';
+import ContactsListContainer from '../components/contacts/ContactsListContainer';
 
 class Contacts extends Component {
 
@@ -16,9 +18,11 @@ class Contacts extends Component {
 
   render() {
     return (
-      <div>
-        contacts Page
-      </div>
+      <main>
+        Contacts page
+        <ContactsListContainer />
+        <ContactDetail />
+      </main>
     )
   }
 }

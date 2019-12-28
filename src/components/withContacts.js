@@ -6,12 +6,13 @@ const withContacts = (Comp) => {
     render() {
       return (
         <ContactsContext.Consumer>
-          {({ contacts, filteredContacts, filterContacts, setContacts }) => (
+          {({ contacts, filteredContacts, filterContacts, setContacts, filterByLetter }) => (
             <Comp
               contacts={contacts}
               filteredContacts={filteredContacts}
               setContacts={setContacts}
               filterContacts={filterContacts}
+              filterByLetter={filterByLetter}
               {...this.props}
             />
           )}
