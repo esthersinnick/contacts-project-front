@@ -16,7 +16,6 @@ class ContactsProvider extends Component {
   }
 
   filterContacts = async (term) => {
-    console.log(term)
     const { contacts } = this.state
     const filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(term.toLowerCase()))
     this.setState({ filteredContacts })
