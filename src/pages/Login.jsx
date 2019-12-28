@@ -31,6 +31,7 @@ class Login extends Component {
 
   render() {
     const { email, password, remember } = this.state
+    const { message } = this.props
     return (
       <div>
         <h1>Login page</h1>
@@ -39,6 +40,9 @@ class Login extends Component {
           <input placeholder="password" name="password" value={password} type="password" onChange={this.inputOnChange} />
           <input name="remember" checked={remember} type="checkbox" onChange={(event) => { this.inputOnChange(event, 'checkbox') }} /> Remember me
           <button type="submit">Login</button>
+          {
+            message && <p>{message}</p>
+          }
         </form>
       </div>
     )

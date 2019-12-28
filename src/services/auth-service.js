@@ -9,22 +9,14 @@ class AuthService {
   }
 
   login = async (user) => {
-    try {
-      //user tiene que tener email, password y remember
-      const res = await this.auth.post('/login', user);
-      return res.data;
-    } catch (err) {
-      console.log(err)
-    }
+    //user tiene que tener email, password y remember
+    const res = await this.auth.post('/login', user)
+    return res.data;
   }
 
   renewToken = async (token) => {
-    try {
-      const res = await this.auth.post('/renew-token', { token });
-      return res.data;
-    } catch (err) {
-      console.log(err);
-    }
+    const res = await this.auth.post('/renew-token', { token });
+    return res.data;
   }
 }
 
