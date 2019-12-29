@@ -17,3 +17,4 @@ const ContactsList = (props) => {
 }
 
 export default withContacts(ContactsList);
+
