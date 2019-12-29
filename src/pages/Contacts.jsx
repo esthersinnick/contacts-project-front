@@ -13,13 +13,14 @@ class Contacts extends Component {
       validateToken();
     }
     const contacts = await contactsService.getAll(token);
+    contacts.sort((a, b) => a.name > b.name ? 1 : -1);
+    console.log(contacts)
     this.props.setContacts(contacts)
   }
 
   render() {
     return (
-      <main>
-        Contacts page
+      <main className="flex flex-col md:flex-row">
         <ContactsListContainer />
         <ContactDetail />
       </main>
