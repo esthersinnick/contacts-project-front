@@ -4,7 +4,7 @@ import noContactImage from "../../images/desierto.png";
 import SearchBar from "../SearchBar";
 
 const ContactDetail = props => {
-  const { selectedContact } = props;
+  const { selectedContact, filteredConnections } = props;
   return (
     <div
       className={
@@ -21,15 +21,22 @@ const ContactDetail = props => {
           <img src={noContactImage} alt="no contact selected" />
         </div>
       ) : (
-        <div className="flex">
+        <div>
           <div className="flex">
-            <img
-              src={props.selectedContact.avatar}
-              alt={props.selectedContact.name}
-            />
-            <p>{props.selectedContact.name}</p>
+            <div className="flex">
+              <img
+                src={props.selectedContact.avatar}
+                alt={props.selectedContact.name}
+              />
+              <p>{props.selectedContact.name}</p>
+            </div>
+            <SearchBar toFilter="connections" />
           </div>
-          <SearchBar />
+          <div className="">
+            {filteredConnections.map(connection => (
+              <div key={connection.id}>{connection.name}</div>
+            ))}
+          </div>
         </div>
       )}
     </div>

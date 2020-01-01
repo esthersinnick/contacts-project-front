@@ -1,30 +1,40 @@
-import React, { Component } from 'react'
-import { ContactsContext } from '../context/contacts-context'
+import React, { Component } from "react";
+import { ContactsContext } from "../context/contacts-context";
 
-const withContacts = (Comp) => {
+const withContacts = Comp => {
   return class withContacts extends Component {
     render() {
       return (
         <ContactsContext.Consumer>
-          {({ contacts, filteredContacts, filterContacts, setContacts, filterByLetter, selectedContact, setContact, connections, filteredConnections, filterConnections, selectedIndex }) => (
+          {({
+            contacts,
+            filteredContacts,
+            setContacts,
+            filterByLetter,
+            selectedContact,
+            setContact,
+            connections,
+            filteredConnections,
+            selectedIndex,
+            filter
+          }) => (
             <Comp
               selectedIndex={selectedIndex}
               contacts={contacts}
               filteredContacts={filteredContacts}
               setContacts={setContacts}
-              filterContacts={filterContacts}
               filterByLetter={filterByLetter}
               selectedContact={selectedContact}
               setContact={setContact}
               connections={connections}
               filteredConnections={filteredConnections}
-              filterConnections={filterConnections}
+              filter={filter}
               {...this.props}
             />
           )}
         </ContactsContext.Consumer>
-      )
+      );
     }
-  }
-}
-export default withContacts
+  };
+};
+export default withContacts;

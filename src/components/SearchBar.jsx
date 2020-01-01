@@ -7,7 +7,7 @@ class SearchBar extends Component {
   };
 
   inputChange = event => {
-    this.props.filterContacts(event.target.value);
+    this.props.filter(event.target.value, this.props.toFilter);
     this.setState({
       term: event.target.value
     });

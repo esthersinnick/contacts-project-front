@@ -8,6 +8,7 @@ class ContactsProvider extends Component {
     filteredContacts: null,
     selectedContact: null,
     connections: [],
+    filteredConnections: [],
     selectedIndex: null
   };
 
@@ -18,30 +19,17 @@ class ContactsProvider extends Component {
     });
   };
 
-  filterContacts = term => {
-    const { contacts } = this.state;
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(term.toLowerCase())
+  filter = (term, target) => {
+    const current = this.state[target];
+    const currentFiltered = current.filter(element =>
+      element.name.toLowerCase().includes(term.toLowerCase())
     );
-    this.setState({ filteredContacts });
+    if (target === "contacts") {
+      this.setState({ filteredContacts: currentFiltered });
+    } else {
+      this.setState({ filteredConnections: currentFiltered });
+    }
   };
-
-  // setContact = index => {
-  //   const { contacts } = this.state;
-  //   const contact = contacts[index];
-  //   const connections = [];
-  //   contact.connections.forEach(connection => {
-  //     const contactConnected = contacts.find(
-  //       contact => contact.id === connection
-  //     );
-  //     connections.push(contactConnected);
-  //   });
-  //   this.setState({
-  //     selectedIndex: index,
-  //     selectedContact: contact,
-  //     connections
-  //   });
-  // };
 
   setContact = index => {
     const { contacts } = this.state;
@@ -53,11 +41,10 @@ class ContactsProvider extends Component {
     this.setState({
       selectedIndex: index,
       selectedContact: contact,
-      connections
+      connections,
+      filteredConnections: connections
     });
   };
-
-  filterConnections = term => {};
 
   filterByLetter = event => {
     const letter = event.currentTarget.innerHTML;
@@ -83,14 +70,13 @@ class ContactsProvider extends Component {
           contacts,
           setContacts: this.setContacts,
           filteredContacts,
-          filterContacts: this.filterContacts,
           filterByLetter: this.filterByLetter,
           selectedContact,
           setContact: this.setContact,
           connections,
           filteredConnections,
-          filterConnections: this.filterConnections,
-          selectedIndex
+          selectedIndex,
+          filter: this.filter
         }}
       >
         {this.props.children}

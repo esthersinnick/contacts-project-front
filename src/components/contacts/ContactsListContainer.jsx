@@ -8,7 +8,7 @@ const ContactsListContainer = props => {
   return (
     <aside className="md:w-2/6 heigth-30 md:h-screen overflow-scroll shadow-2xl">
       <div className="p-3 fixed w-full md:w-2/6 bg-white border-b border-primary-500">
-        <SearchBar />
+        <SearchBar toFilter="contacts" />
       </div>
       <div className="w-full height-30 md:h-full bg-white md:w-2/6 flex p-5 mt-12 fixed bottom-0 top-0 ">
         <Alphabet />
