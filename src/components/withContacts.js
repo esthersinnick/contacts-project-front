@@ -15,11 +15,11 @@ const withContacts = Comp => {
             setContact,
             connections,
             filteredConnections,
-            selectedIndex,
+            selectedId,
             filter
           }) => (
             <Comp
-              selectedIndex={selectedIndex}
+              selectedId={selectedId}
               contacts={contacts}
               filteredContacts={filteredContacts}
               setContacts={setContacts}

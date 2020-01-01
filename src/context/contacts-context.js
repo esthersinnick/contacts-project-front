@@ -9,7 +9,7 @@ class ContactsProvider extends Component {
     selectedContact: null,
     connections: [],
     filteredConnections: [],
-    selectedIndex: null
+    selectedId: null
   };
 
   setContacts = contacts => {
@@ -31,15 +31,16 @@ class ContactsProvider extends Component {
     }
   };
 
-  setContact = index => {
+  setContact = id => {
     const { contacts } = this.state;
-    const contact = contacts[index];
+    const contact = contacts.find(contact => contact.id === id);
+    console.log(contact);
     const connections = contact.connections
       .map(connection => contacts.find(contact => contact.id === connection))
       .filter(Boolean);
 
     this.setState({
-      selectedIndex: index,
+      selectedId: id,
       selectedContact: contact,
       connections,
       filteredConnections: connections
@@ -62,7 +63,7 @@ class ContactsProvider extends Component {
       selectedContact,
       connections,
       filteredConnections,
-      selectedIndex
+      selectedId
     } = this.state;
     return (
       <ContactsContext.Provider
@@ -75,7 +76,7 @@ class ContactsProvider extends Component {
           setContact: this.setContact,
           connections,
           filteredConnections,
-          selectedIndex,
+          selectedId,
           filter: this.filter
         }}
       >

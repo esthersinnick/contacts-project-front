@@ -2,6 +2,7 @@ import React from "react";
 import withContacts from "../withContacts";
 import noContactImage from "../../images/desierto.png";
 import SearchBar from "../SearchBar";
+import ConnectionsList from "./ConnectionsList";
 
 const ContactDetail = props => {
   const { selectedContact, filteredConnections } = props;
@@ -32,11 +33,7 @@ const ContactDetail = props => {
             </div>
             <SearchBar toFilter="connections" />
           </div>
-          <div className="">
-            {filteredConnections.map(connection => (
-              <div key={connection.id}>{connection.name}</div>
-            ))}
-          </div>
+          <ConnectionsList />
         </div>
       )}
     </div>
