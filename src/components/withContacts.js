@@ -16,7 +16,12 @@ const withContacts = Comp => {
             connections,
             filteredConnections,
             selectedId,
-            filter
+            filter,
+            contactsPages,
+            currentContactsPage,
+            connectionsPages,
+            currentConnectionsPage,
+            setPage
           }) => (
             <Comp
               selectedId={selectedId}
@@ -29,6 +34,11 @@ const withContacts = Comp => {
               connections={connections}
               filteredConnections={filteredConnections}
               filter={filter}
+              contactsPages={contactsPages}
+              currentContactsPage={currentContactsPage}
+              connectionsPages={connectionsPages}
+              currentConnectionsPage={currentConnectionsPage}
+              setPage={setPage}
               {...this.props}
             />
           )}

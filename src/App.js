@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
-import AuthProvider from './context/auth-context';
-import ContactsProvider from './context/contacts-context';
+import AuthProvider from "./context/auth-context";
+import ContactsProvider from "./context/contacts-context";
 
-import PrivateRoute from './components/routes/PrivateRoute';
-import AnonRoute from './components/routes/AnonRoute';
+import PrivateRoute from "./components/routes/PrivateRoute";
+import AnonRoute from "./components/routes/AnonRoute";
 
-import Contacts from './pages/Contacts';
-import Login from './pages/Login';
+import Contacts from "./pages/Contacts";
+import Login from "./pages/Login";
 
-import './App.css';
+import "./App.css";
 
 class App extends Component {
   render() {

@@ -9,13 +9,49 @@ class ContactsProvider extends Component {
     selectedContact: null,
     connections: [],
     filteredConnections: [],
-    selectedId: null
+    selectedId: null,
+    contactsPages: null,
+    currentContactsPage: 1,
+    connectionsPages: null,
+    currentConnectionsPage: 1
   };
 
   setContacts = contacts => {
+    const contactsPages = Math.ceil(contacts.length / 50);
     this.setState({
       contacts,
-      filteredContacts: contacts
+      filteredContacts: contacts,
+      contactsPages
+    });
+  };
+
+  setPage = (target, value, limit) => {
+    let newPage = this.state[target];
+    if (value && newPage < limit) {
+      this.setState({
+        [target]: newPage + 1
+      });
+    }
+    if (!value && newPage > 1) {
+      this.setState({
+        [target]: newPage - 1
+      });
+    }
+  };
+
+  setContact = id => {
+    const { contacts } = this.state;
+    const contact = contacts.find(contact => contact.id === id);
+    const connections = contact.connections
+      .map(connection => contacts.find(contact => contact.id === connection))
+      .filter(Boolean);
+
+    this.setState({
+      selectedId: id,
+      selectedContact: contact,
+      connections,
+      filteredConnections: connections,
+      connectionsPages: Math.ceil(connections.length / 20)
     });
   };
 
@@ -25,26 +61,20 @@ class ContactsProvider extends Component {
       element.name.toLowerCase().includes(term.toLowerCase())
     );
     if (target === "contacts") {
-      this.setState({ filteredContacts: currentFiltered });
+      const contactsPages = Math.ceil(currentFiltered.length / 50);
+      this.setState({
+        filteredContacts: currentFiltered,
+        contactsPages,
+        currentContactsPage: 1
+      });
     } else {
-      this.setState({ filteredConnections: currentFiltered });
+      const connectionsPages = Math.ceil(currentFiltered.length / 20);
+      this.setState({
+        filteredConnections: currentFiltered,
+        connectionsPages,
+        currentConnectionsPage: 1
+      });
     }
-  };
-
-  setContact = id => {
-    const { contacts } = this.state;
-    const contact = contacts.find(contact => contact.id === id);
-    console.log(contact);
-    const connections = contact.connections
-      .map(connection => contacts.find(contact => contact.id === connection))
-      .filter(Boolean);
-
-    this.setState({
-      selectedId: id,
-      selectedContact: contact,
-      connections,
-      filteredConnections: connections
-    });
   };
 
   filterByLetter = event => {
@@ -53,7 +83,13 @@ class ContactsProvider extends Component {
     const filteredContacts = contacts.filter(
       contact => contact.name[0].toLowerCase() === letter
     );
-    this.setState({ filteredContacts });
+    const contactsPages = Math.ceil(filteredContacts.length / 50);
+    //calcular pages
+    this.setState({
+      filteredContacts,
+      currentContactsPage: 1,
+      contactsPages
+    });
   };
 
   render() {
@@ -63,7 +99,11 @@ class ContactsProvider extends Component {
       selectedContact,
       connections,
       filteredConnections,
-      selectedId
+      selectedId,
+      contactsPages,
+      currentContactsPage,
+      connectionsPages,
+      currentConnectionsPage
     } = this.state;
     return (
       <ContactsContext.Provider
@@ -77,7 +117,12 @@ class ContactsProvider extends Component {
           connections,
           filteredConnections,
           selectedId,
-          filter: this.filter
+          filter: this.filter,
+          contactsPages,
+          currentContactsPage,
+          connectionsPages,
+          currentConnectionsPage,
+          setPage: this.setPage
         }}
       >
         {this.props.children}

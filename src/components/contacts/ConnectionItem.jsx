@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const ConnectionItem = () => {
-  return (
-    <div>
+const ConnectionItem = props => {
+  return <div>{props.children}</div>;
+};
 
-    </div>
-  )
-}
-
-export default ConnectionItem
+export default ConnectionItem;
