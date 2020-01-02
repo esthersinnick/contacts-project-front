@@ -659,6 +659,10 @@ video {
   height: 70vh;
 }
 
+.height-86 {
+  height: 86%;
+}
+
 .inherit {
   width: inherit;
 }

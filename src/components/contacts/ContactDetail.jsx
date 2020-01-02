@@ -16,7 +16,7 @@ const ContactDetail = props => {
       }
     >
       {!selectedContact ? (
-        <div className="border border-dashed border-primary-300 pt-20px rounded-lg">
+        <div className="md:border border-dashed border-primary-300 pt-20px rounded-lg">
           <p className="uppercase font-bold text-lg text-indigo-300 text-center mt-8 ">
             No contact selected
           </p>
@@ -24,18 +24,18 @@ const ContactDetail = props => {
         </div>
       ) : (
         <div className="p-2">
-          <div className="flex m-1 p-4 border-b-1 border-primary-300 items-center">
-            <div className="flex w-3/5 items-center">
+          <div className="flex flex-col md:flex-row m-1 p-4 border-b-1 border-primary-300 items-center">
+            <div className="flex flex-col md:flex-row w-3/5 items-center">
               <img
                 src={props.selectedContact.avatar}
                 alt={props.selectedContact.name}
                 className="rounded-full border-2 border-primary-500 w-20 "
               />
-              <p className="text-3xl text-primary-500 ml-3">
+              <p className="text-3xl text-center md:text-left text-primary-500 ml-3">
                 {props.selectedContact.name}
               </p>
             </div>
-            <div className="w-2/5">
+            <div className="w-full text-center md:w-2/5 md:textleft">
               <SearchBar toFilter="connections" />
             </div>
           </div>

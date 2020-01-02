@@ -22,7 +22,7 @@ class SearchBar extends Component {
         value={term}
         onChange={this.inputChange}
         placeholder="Search..."
-        className="input border-primary-500 rounded w-full"
+        className="input border-primary-500 rounded w-5/6 md:w-full"
       />
     );
   }
