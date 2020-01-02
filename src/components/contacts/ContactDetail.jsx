@@ -6,6 +6,7 @@ import ConnectionsList from "./ConnectionsList";
 
 const ContactDetail = props => {
   const { selectedContact } = props;
+
   return (
     <div
       className={
