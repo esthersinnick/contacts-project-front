@@ -16,25 +16,23 @@ const ContactsList = props => {
       {contactsPages === 0 ? (
         <p>No results found</p>
       ) : filteredContacts ? (
-        filteredContacts.map((contact, index) => {
-          if (index >= startIndex && index < endIndex) {
-            return (
-              <p
-                className={
-                  selectedId === contact.id
-                    ? "text-primary-500 cursor-pointer"
-                    : "hover:text-primary-500 cursor-pointer"
-                }
-                key={contact.id}
-                onClick={() => {
-                  setContact(contact.id);
-                }}
-              >
-                {contact.name}
-              </p>
-            );
-          }
-        })
+        filteredContacts.map((contact, index) =>
+          index >= startIndex && index < endIndex ? (
+            <p
+              className={
+                selectedId === contact.id
+                  ? "text-primary-500 cursor-pointer"
+                  : "hover:text-primary-500 cursor-pointer"
+              }
+              key={contact.id}
+              onClick={() => {
+                setContact(contact.id);
+              }}
+            >
+              {contact.name}
+            </p>
+          ) : null
+        )
       ) : null}
     </div>
   );

@@ -7,7 +7,7 @@ import Pagination from "../Pagination";
 
 const ContactsListContainer = props => {
   return (
-    <aside className="md:w-2/6 heigth-30 md:h-screen overflow-scroll shadow-2xl">
+    <aside className="md:w-2/6 heigth-30 md:min-h-screen overflow-scroll shadow-2xl">
       <div className="p-3 fixed w-full md:w-2/6 bg-white border-b border-primary-500">
         <SearchBar toFilter="contacts" />
       </div>
@@ -15,7 +15,7 @@ const ContactsListContainer = props => {
         <Alphabet />
         <ContactsList />
       </div>
-      <div className="hidden md:block">
+      <div className="hidden md:block  w-full md:w-2/6 ">
         <Pagination
           pages={props.contactsPages}
           current={props.currentContactsPage}

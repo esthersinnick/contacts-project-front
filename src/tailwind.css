@@ -1,16 +1,16 @@
 @tailwind base;
 @tailwind components;
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap");
 * {
   /* font-family: 'Courier New', Courier, monospace; */
-  font-family:  'Lato', sans-serif;;
+  font-family: "Lato", sans-serif;
   color: #25272b;
 }
 
 .w-30pc {
   width: 30%;
 }
-.input{
+.input {
   border: 1px solid;
   padding: 0.2em 0.5em;
 }
@@ -21,15 +21,34 @@
   color: #fff;
 }
 
-.height-30{
+.height-30 {
   height: 30vh;
 }
 
-.height-70{
+.height-70 {
   height: 70vh;
 }
 
-.btn:hover, .btn-blue {
+.inherit {
+  width: inherit;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.disabledIcon {
+  width: 1rem;
+  fill: white;
+}
+
+.activeIcon {
+  width: 1rem;
+  fill: #968fff;
+}
+
+.btn:hover,
+.btn-blue {
   color: #fff;
   background-color: #968fff;
 }

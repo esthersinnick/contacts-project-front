@@ -12,20 +12,16 @@ const ConnectionsList = props => {
   const startIndex = (currentConnectionsPage - 1) * 20;
   const endIndex = startIndex + 20;
   return (
-    <div>
-      <div className="w-full flex flex-wrap overflow-scroll">
+    <div className="flex flex-col items-center">
+      <div className="w-full pl-4 pr-4 pb-16 flex flex-wrap overflow-scroll">
         {connectionsPages === 0 ? (
           <p>No results found</p>
         ) : (
-          filteredConnections.map((connection, index) => {
-            if (index >= startIndex && index < endIndex) {
-              return (
-                <ConnectionItem key={connection.id}>
-                  {connection.name}
-                </ConnectionItem>
-              );
-            }
-          })
+          filteredConnections.map((connection, index) =>
+            index >= startIndex && index < endIndex ? (
+              <ConnectionItem key={connection.id} connection={connection} />
+            ) : null
+          )
         )}
       </div>
       <Pagination

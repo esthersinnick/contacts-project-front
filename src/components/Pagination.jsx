@@ -1,27 +1,42 @@
 import React from "react";
 import withContacts from "./withContacts";
+import ArrowIcon from "../images/arrowIcon/ArrowIcon";
 
 const Pagination = props => {
   return (
-    <div className=" absolute bg-white w-full md:w-2/6 bottom-0 p-3 top-auto text-center md:flex">
+    <div className="fixed inherit bottom-0 top-auto p-3 justify-center bg-white flex items-center rounded border border-primary-100">
       <div
-        className={props.current === 1 ? "disabled" : "active"}
         onClick={() => {
           props.setPage(props.target, false, props.pages);
         }}
       >
-        prev
+        <ArrowIcon
+          customDiv={
+            props.current === 1
+              ? "rotate p-2 rounded mr-3 cursor-pointer bg-primary-100"
+              : "rotate p-2 rounded mr-3 cursor-pointer border border-primary-500"
+          }
+          customSvg={props.current === 1 ? "disabledIcon" : "activeIcon"}
+        />
       </div>
       <p>
         {props.current}/{props.pages}
       </p>
       <div
-        className={props.current === props.pages ? "disabled" : "active"}
         onClick={() => {
           props.setPage(props.target, true, props.pages);
         }}
       >
-        next
+        <ArrowIcon
+          customDiv={
+            props.current === props.pages
+              ? "p-2 rounded ml-3 cursor-pointer bg-primary-100"
+              : "p-2 rounded ml-3 cursor-pointer border border-primary-500"
+          }
+          customSvg={
+            props.current === props.pages ? "disabledIcon" : "activeIcon"
+          }
+        />
       </div>
     </div>
   );
