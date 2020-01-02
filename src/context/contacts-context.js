@@ -84,7 +84,6 @@ class ContactsProvider extends Component {
       contact => contact.name[0].toLowerCase() === letter
     );
     const contactsPages = Math.ceil(filteredContacts.length / 50);
-    //calcular pages
     this.setState({
       filteredContacts,
       currentContactsPage: 1,
@@ -95,11 +94,11 @@ class ContactsProvider extends Component {
   render() {
     const {
       contacts,
-      filteredContacts,
-      selectedContact,
       connections,
-      filteredConnections,
       selectedId,
+      selectedContact,
+      filteredContacts,
+      filteredConnections,
       contactsPages,
       currentContactsPage,
       connectionsPages,
@@ -109,15 +108,15 @@ class ContactsProvider extends Component {
       <ContactsContext.Provider
         value={{
           contacts,
-          setContacts: this.setContacts,
-          filteredContacts,
-          filterByLetter: this.filterByLetter,
-          selectedContact,
-          setContact: this.setContact,
           connections,
-          filteredConnections,
+          setContacts: this.setContacts,
+          setContact: this.setContact,
           selectedId,
+          selectedContact,
+          filteredContacts,
           filter: this.filter,
+          filterByLetter: this.filterByLetter,
+          filteredConnections,
           contactsPages,
           currentContactsPage,
           connectionsPages,

@@ -10,8 +10,6 @@ import AnonRoute from "./components/routes/AnonRoute";
 import Contacts from "./pages/Contacts";
 import Login from "./pages/Login";
 
-import "./App.css";
-
 class App extends Component {
   render() {
     return (

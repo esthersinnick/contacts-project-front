@@ -1,6 +1,6 @@
 import React from "react";
 import withContacts from "../withContacts";
-
+import loader from "../../images/load.gif";
 const ContactsList = props => {
   const {
     filteredContacts,
@@ -26,15 +26,17 @@ const ContactsList = props => {
                   : "hover:text-primary-500 cursor-pointer"
               }
               key={contact.id}
-              onClick={() => {
-                setContact(contact.id);
-              }}
+              onClick={setContact.bind(this, contact.id)}
             >
               {contact.name}
             </p>
           ) : null
         )
-      ) : null}
+      ) : (
+        <div className="w-full flex justify-center items-center">
+          <img src={loader} className="w-2/5" alt="loading" />
+        </div>
+      )}
     </div>
   );
 };
