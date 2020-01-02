@@ -15,11 +15,13 @@ const ContactsListContainer = props => {
         <Alphabet />
         <ContactsList />
       </div>
-      <Pagination
-        pages={props.contactsPages}
-        current={props.currentContactsPage}
-        target="currentContactsPage"
-      />
+      <div className="hidden md:block">
+        <Pagination
+          pages={props.contactsPages}
+          current={props.currentContactsPage}
+          target="currentContactsPage"
+        />
+      </div>
     </aside>
   );
 };

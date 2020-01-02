@@ -3,7 +3,7 @@ import withContacts from "./withContacts";
 
 const Pagination = props => {
   return (
-    <div className=" absolute bg-white w-full md:w-2/6 bottom-0 p-3 top-auto text-center hidden md:flex">
+    <div className=" absolute bg-white w-full md:w-2/6 bottom-0 p-3 top-auto text-center md:flex">
       <div
         className={props.current === 1 ? "disabled" : "active"}
         onClick={() => {
