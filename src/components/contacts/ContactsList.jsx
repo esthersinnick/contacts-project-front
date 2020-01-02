@@ -6,15 +6,16 @@ const ContactsList = props => {
     filteredContacts,
     selectedId,
     setContact,
-    currentContactsPage,
-    contactsPages
+    currentContactsPage
   } = props;
   const startIndex = (currentContactsPage - 1) * 50;
   const endIndex = startIndex + 50;
   return (
     <div className="h-full w-full ml-4 overflow-y-scroll">
-      {contactsPages === 0 ? (
-        <p>No results found</p>
+      {filteredContacts && filteredContacts.length === 0 ? (
+        <p className="w-full m-3 p-2 font-light text-primary-500">
+          No results found
+        </p>
       ) : filteredContacts ? (
         filteredContacts.map((contact, index) =>
           index >= startIndex && index < endIndex ? (

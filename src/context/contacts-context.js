@@ -61,14 +61,14 @@ class ContactsProvider extends Component {
       element.name.toLowerCase().includes(term.toLowerCase())
     );
     if (target === "contacts") {
-      const contactsPages = Math.ceil(currentFiltered.length / 50);
+      const contactsPages = Math.ceil(currentFiltered.length / 50) || 1;
       this.setState({
         filteredContacts: currentFiltered,
         contactsPages,
         currentContactsPage: 1
       });
     } else {
-      const connectionsPages = Math.ceil(currentFiltered.length / 20);
+      const connectionsPages = Math.ceil(currentFiltered.length / 20) || 1;
       this.setState({
         filteredConnections: currentFiltered,
         connectionsPages,
