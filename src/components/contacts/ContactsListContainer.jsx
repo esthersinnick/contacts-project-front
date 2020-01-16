@@ -1,5 +1,5 @@
-import React from "react";
-import withContacts from "../withContacts";
+import React, { useContext } from "react";
+import { ContactsContext } from "../../context/contacts-context";
 import ContactsList from "./ContactsList";
 import Alphabet from "./Alphabet";
 import SearchBar from "../SearchBar";
@@ -7,6 +7,7 @@ import Pagination from "../Pagination";
 import CloseIcon from "../../images/closeIcon/CloseIcon";
 
 const ContactsListContainer = props => {
+  const contactsContext = useContext(ContactsContext);
   return (
     <aside
       className={
@@ -30,8 +31,8 @@ const ContactsListContainer = props => {
       </div>
       <div className="relative z-10 md:block w-full md:w-2/6 ">
         <Pagination
-          pages={props.contactsPages}
-          current={props.currentContactsPage}
+          pages={contactsContext.contactsPages}
+          current={contactsContext.currentContactsPage}
           target="currentContactsPage"
         />
       </div>
@@ -39,4 +40,4 @@ const ContactsListContainer = props => {
   );
 };
 
-export default withContacts(ContactsListContainer);
+export default ContactsListContainer;

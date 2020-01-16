@@ -1,54 +1,52 @@
-import React, { Component } from "react";
-import withAuth from "../components/withAuth";
-import withContacts from "../components/withContacts";
+import React, { useState, useEffect, useContext } from "react";
+import { ContactsContext } from "../context/contacts-context";
+import { AuthContext } from "../context/auth-context";
 import contactsService from "../services/contacts-service";
 import ContactDetail from "../components/contacts/ContactDetail";
 import ContactsListContainer from "../components/contacts/ContactsListContainer";
 import MenuIcon from "../images/menuIcon/MenuIcon";
 
-class Contacts extends Component {
-  state = {
-    menuOpened: true
-  };
-  componentDidMount = async () => {
-    const { token, firstTime, validateToken } = this.props;
-    if (firstTime) {
-      validateToken();
+const Contacts = () => {
+  const [menuOpened, setMenuOpened] = useState(true);
+  const contactsContext = useContext(ContactsContext);
+  const authContext = useContext(AuthContext);
+
+  /*eslint-disable */
+  useEffect(() => {
+    if (authContext.firstTime) {
+      authContext.validateToken();
     }
-    const contacts = await contactsService.getAll(token);
-    contacts.sort((a, b) => (a.name > b.name ? 1 : -1));
-    this.props.setContacts(contacts);
+    const getAllContacts = async () => {
+      const contacts = await contactsService.getAll(authContext.token);
+      contacts.sort((a, b) => (a.name > b.name ? 1 : -1));
+      contactsContext.setContacts(contacts);
+    };
+    getAllContacts();
+  }, []);
+  /*eslint-enable */
+
+  const toggleMenu = () => {
+    setMenuOpened(!menuOpened);
   };
 
-  toggleMenu = () => {
-    this.setState({
-      menuOpened: !this.state.menuOpened
-    });
-  };
+  return (
+    <>
+      <div className="absolute top-0 right-0 md:hidden" onClick={toggleMenu}>
+        <MenuIcon
+          customDiv="p-2 rounded ml-3 cursor-pointer bg-primary-100"
+          customSvg="w-8 m-4 activeIcon"
+        />
+      </div>
 
-  render() {
-    return (
-      <>
-        <div
-          className="absolute top-0 right-0 md:hidden"
-          onClick={this.toggleMenu}
-        >
-          <MenuIcon
-            customDiv="p-2 rounded ml-3 cursor-pointer bg-primary-100"
-            customSvg="w-8 m-4 activeIcon"
-          />
-        </div>
+      <main className="flex flex-col md:flex-row">
+        <ContactsListContainer
+          toggleMenu={toggleMenu}
+          menuOpened={menuOpened}
+        />
+        <ContactDetail />
+      </main>
+    </>
+  );
+};
 
-        <main className="flex flex-col md:flex-row">
-          <ContactsListContainer
-            toggleMenu={this.toggleMenu}
-            menuOpened={this.state.menuOpened}
-          />
-          <ContactDetail />
-        </main>
-      </>
-    );
-  }
-}
-
-export default withAuth(withContacts(Contacts));
+export default Contacts;

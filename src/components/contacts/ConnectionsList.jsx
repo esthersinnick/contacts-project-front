@@ -1,11 +1,12 @@
-import React from "react";
-import withContacts from "../withContacts";
+import React, { useContext } from "react";
+import { ContactsContext } from "../../context/contacts-context";
 import ConnectionItem from "./ConnectionItem";
 import Pagination from "../Pagination";
 import loader from "../../images/load.gif";
 
-const ConnectionsList = props => {
-  const { filteredConnections, currentConnectionsPage } = props;
+const ConnectionsList = () => {
+  const contactsContext = useContext(ContactsContext);
+  const { filteredConnections, currentConnectionsPage } = contactsContext;
   const startIndex = (currentConnectionsPage - 1) * 20;
   const endIndex = startIndex + 20;
   return (
@@ -30,12 +31,12 @@ const ConnectionsList = props => {
         )}
       </div>
       <Pagination
-        pages={props.connectionsPages}
-        current={props.currentConnectionsPage}
+        pages={contactsContext.connectionsPages}
+        current={contactsContext.currentConnectionsPage}
         target="currentConnectionsPage"
       />
     </div>
   );
 };
 
-export default withContacts(ConnectionsList);
+export default ConnectionsList;

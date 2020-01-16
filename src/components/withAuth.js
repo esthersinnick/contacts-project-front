@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { AuthContext } from '../context/auth-context'
+import React, { Component } from "react";
+import { AuthContext } from "../context/auth-context";
 
-const withAuth = (Comp) => {
+const withAuth = Comp => {
   return class WithAuth extends Component {
     render() {
       return (
@@ -18,8 +18,8 @@ const withAuth = (Comp) => {
             />
           )}
         </AuthContext.Consumer>
-      )
+      );
     }
-  }
-}
-export default withAuth
+  };
+};
+export default withAuth;

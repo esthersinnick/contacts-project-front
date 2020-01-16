@@ -1,11 +1,19 @@
-import React from "react";
-import withContacts from "./withContacts";
+import React, { useContext } from "react";
 import ArrowIcon from "../images/arrowIcon/ArrowIcon";
+import { ContactsContext } from "../context/contacts-context";
 
 const Pagination = props => {
+  const contactsContext = useContext(ContactsContext);
   return (
     <div className="fixed inherit bottom-0 top-auto p-3 justify-center bg-white flex items-center rounded border border-primary-100">
-      <div onClick={props.setPage.bind(this, props.target, false, props.pages)}>
+      <div
+        onClick={contactsContext.setPage.bind(
+          this,
+          props.target,
+          false,
+          props.pages
+        )}
+      >
         <ArrowIcon
           customDiv={
             props.current === 1
@@ -18,7 +26,14 @@ const Pagination = props => {
       <p>
         {props.current}/{props.pages}
       </p>
-      <div onClick={props.setPage.bind(this, props.target, true, props.pages)}>
+      <div
+        onClick={contactsContext.setPage.bind(
+          this,
+          props.target,
+          true,
+          props.pages
+        )}
+      >
         <ArrowIcon
           customDiv={
             props.current === props.pages
@@ -34,4 +49,4 @@ const Pagination = props => {
   );
 };
 
-export default withContacts(Pagination);
+export default Pagination;

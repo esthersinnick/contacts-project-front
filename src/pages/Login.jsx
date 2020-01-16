@@ -1,5 +1,4 @@
 import React from "react";
-import withAuth from "../components/withAuth";
 import LoginForm from "../components/LoginForm";
 import image from "../images/abstract.jpg";
 
@@ -23,4 +22,4 @@ const Login = () => {
   );
 };
 
-export default withAuth(Login);
+export default Login;

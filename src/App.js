@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 
 import AuthProvider from "./context/auth-context";
@@ -10,23 +10,21 @@ import AnonRoute from "./components/routes/AnonRoute";
 import Contacts from "./pages/Contacts";
 import Login from "./pages/Login";
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <AuthProvider>
-          <div>
-            <Switch>
-              <AnonRoute path="/login" exact component={Login} />
-              <ContactsProvider>
-                <PrivateRoute path="/" exact component={Contacts} />
-              </ContactsProvider>
-            </Switch>
-          </div>
-        </AuthProvider>
-      </Router>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Router>
+      <AuthProvider>
+        <div>
+          <Switch>
+            <AnonRoute path="/login" exact component={Login} />
+            <ContactsProvider>
+              <PrivateRoute path="/" exact component={Contacts} />
+            </ContactsProvider>
+          </Switch>
+        </div>
+      </AuthProvider>
+    </Router>
+  );
+};
 
 export default App;

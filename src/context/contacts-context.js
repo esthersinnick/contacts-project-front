@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 export const ContactsContext = React.createContext();
 
-class ContactsProvider extends Component {
-  state = {
+const ContactsProvider = props => {
+  const [contactsState, setContactsState] = useState({
     contacts: null,
     filteredContacts: null,
     selectedContact: null,
@@ -14,39 +14,43 @@ class ContactsProvider extends Component {
     currentContactsPage: 1,
     connectionsPages: null,
     currentConnectionsPage: 1
-  };
+  });
 
-  setContacts = contacts => {
+  const setContacts = contacts => {
     const contactsPages = Math.ceil(contacts.length / 50);
-    this.setState({
+    setContactsState({
+      ...contactsState,
       contacts,
       filteredContacts: contacts,
       contactsPages
     });
   };
 
-  setPage = (target, value, limit) => {
-    let newPage = this.state[target];
+  const setPage = (target, value, limit) => {
+    let newPage = contactsState[target];
     if (value && newPage < limit) {
-      this.setState({
+      setContactsState({
+        ...contactsState,
         [target]: newPage + 1
       });
     }
     if (!value && newPage > 1) {
-      this.setState({
+      setContactsState({
+        ...contactsState,
         [target]: newPage - 1
       });
     }
   };
 
-  setContact = id => {
-    const { contacts } = this.state;
+  const setContact = id => {
+    const { contacts } = contactsState;
     const contact = contacts.find(contact => contact.id === id);
     const connections = contact.connections
       .map(connection => contacts.find(contact => contact.id === connection))
       .filter(Boolean);
 
-    this.setState({
+    setContactsState({
+      ...contactsState,
       selectedId: id,
       selectedContact: contact,
       connections,
@@ -55,21 +59,23 @@ class ContactsProvider extends Component {
     });
   };
 
-  filter = (term, target) => {
-    const current = this.state[target];
+  const filter = (term, target) => {
+    const current = contactsState[target];
     const currentFiltered = current.filter(element =>
       element.name.toLowerCase().includes(term.toLowerCase())
     );
     if (target === "contacts") {
       const contactsPages = Math.ceil(currentFiltered.length / 50) || 1;
-      this.setState({
+      setContactsState({
+        ...contactsState,
         filteredContacts: currentFiltered,
         contactsPages,
         currentContactsPage: 1
       });
     } else {
       const connectionsPages = Math.ceil(currentFiltered.length / 20) || 1;
-      this.setState({
+      setContactsState({
+        ...contactsState,
         filteredConnections: currentFiltered,
         connectionsPages,
         currentConnectionsPage: 1
@@ -77,57 +83,56 @@ class ContactsProvider extends Component {
     }
   };
 
-  filterByLetter = event => {
+  const filterByLetter = event => {
     const letter = event.currentTarget.innerHTML;
-    const { contacts } = this.state;
+    const { contacts } = contactsState;
     const filteredContacts = contacts.filter(
       contact => contact.name[0].toLowerCase() === letter
     );
     const contactsPages = Math.ceil(filteredContacts.length / 50);
-    this.setState({
+    setContactsState({
+      ...contactsState,
       filteredContacts,
       currentContactsPage: 1,
       contactsPages
     });
   };
 
-  render() {
-    const {
-      contacts,
-      connections,
-      selectedId,
-      selectedContact,
-      filteredContacts,
-      filteredConnections,
-      contactsPages,
-      currentContactsPage,
-      connectionsPages,
-      currentConnectionsPage
-    } = this.state;
-    return (
-      <ContactsContext.Provider
-        value={{
-          contacts,
-          connections,
-          setContacts: this.setContacts,
-          setContact: this.setContact,
-          selectedId,
-          selectedContact,
-          filteredContacts,
-          filter: this.filter,
-          filterByLetter: this.filterByLetter,
-          filteredConnections,
-          contactsPages,
-          currentContactsPage,
-          connectionsPages,
-          currentConnectionsPage,
-          setPage: this.setPage
-        }}
-      >
-        {this.props.children}
-      </ContactsContext.Provider>
-    );
-  }
-}
+  const {
+    contacts,
+    connections,
+    selectedId,
+    selectedContact,
+    filteredContacts,
+    filteredConnections,
+    contactsPages,
+    currentContactsPage,
+    connectionsPages,
+    currentConnectionsPage
+  } = contactsState;
+  return (
+    <ContactsContext.Provider
+      value={{
+        contacts,
+        connections,
+        setContacts,
+        setContact,
+        selectedId,
+        selectedContact,
+        filteredContacts,
+        filter,
+        filterByLetter,
+        filteredConnections,
+        contactsPages,
+        currentContactsPage,
+        connectionsPages,
+        currentConnectionsPage,
+        setPage
+      }}
+    >
+      {props.children}
+    </ContactsContext.Provider>
+  );
+};
 
 export default ContactsProvider;

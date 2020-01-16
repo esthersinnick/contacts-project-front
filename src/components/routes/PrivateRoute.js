@@ -1,19 +1,20 @@
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import withAuth from '../withAuth'
+import React, { useContext } from "react";
+import { Route, Redirect } from "react-router-dom";
+import { AuthContext } from "../../context/auth-context";
 
-const PrivateRoute = (props) => {
-  const { token, component: Component, ...rest } = props;
+const PrivateRoute = props => {
+  const authContext = useContext(AuthContext);
+
+  const { component: Component, ...rest } = props;
   return (
     <>
-      {token ?
-        <Route
-          render={(props) => <Component {...props} />} {...rest}
-        />
-        : <Redirect to='/login' />}
+      {authContext.token ? (
+        <Route render={props => <Component {...props} />} {...rest} />
+      ) : (
+        <Redirect to="/login" />
+      )}
     </>
+  );
+};
 
-  )
-}
-
-export default withAuth(PrivateRoute);
+export default PrivateRoute;

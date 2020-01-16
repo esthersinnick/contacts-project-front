@@ -1,13 +1,16 @@
-import React from "react";
-import withContacts from "../withContacts";
+import React, { useContext } from "react";
+import { ContactsContext } from "../../context/contacts-context";
 import loader from "../../images/load.gif";
-const ContactsList = props => {
+
+const ContactsList = () => {
+  const contactsContext = useContext(ContactsContext);
   const {
     filteredContacts,
     selectedId,
     setContact,
     currentContactsPage
-  } = props;
+  } = contactsContext;
+
   const startIndex = (currentContactsPage - 1) * 50;
   const endIndex = startIndex + 50;
   return (
@@ -41,4 +44,4 @@ const ContactsList = props => {
   );
 };
 
-export default withContacts(ContactsList);
+export default ContactsList;
